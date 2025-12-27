@@ -1,10 +1,10 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaXmark,  } from 'react-icons/fa6';
 
 const Category = () => {
     const navigate = useNavigate();
-    const [select, setSelect] = useState <boolean>(false)
+    // const [select, setSelect] = useState <boolean>(false)
 
   return (
     <div className="w-full lg:w-[80%] flex items-center justify-center p-4 lg:p-8 ">
