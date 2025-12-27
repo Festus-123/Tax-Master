@@ -5,6 +5,7 @@ import Body from "./components/body/Body";
 import LandingPage from "./components/landing-page/LandingPage";
 import TermsPolicies from "./components/terms-and-condition/TermsPolicies";
 import Category from "./components/category/Category";
+import Income from "./components/income/Income";
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
           <Route index element={<LandingPage />}/>
           <Route path="terms-and-conditions" element={<TermsPolicies />}/>
           <Route path="category" element={<Category />}/>
+          <Route path="income" element={<Income />}/>
         </Route>
       </Routes>
     </BrowserRouter>
