@@ -78,12 +78,12 @@ const Category = () => {
 
         <button
           onClick={() => {
-            if (select.length > 0 || value.length > 0) {
+            if (select.length > 0 && value !== "") {
               navigate("/income", {
                 state: { selected: select, name: value },
               }, );
             } else {
-              window.alert("an option must be selectedd");
+              window.alert("invalid selection or input");
             }
           }}
           className="bg-blue-700 hover:bg-blue-500  text-white text-center p-2 md:p-3 lg:p-4 rounded-md w-full cursor-pointer"

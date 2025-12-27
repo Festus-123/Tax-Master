@@ -9,7 +9,7 @@ const LandingPage = () => {
         <img
           src="/onboarding.jpeg"
           alt=""
-          className="w-[40%] h-auto animate-pulse"
+          className="w-[80%] md:w-[60%] lg:w-[40%] h-auto animate-pulse"
         />
         <h1 className="text-3xl font-medium">
           Calculate and Estimate your tax with Tax master
