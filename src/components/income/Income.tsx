@@ -33,6 +33,11 @@ const Income = () => {
           "Capital Allowances (Optional) – Deduction for business assets like machinery or equipment, reducing taxable profit.",
           "Loss Brought Forward (Optional) – Losses from previous years carried forward to offset current year profits, lowering tax liability."
         );
+      } else if (item === "Other") {
+        newRequirements.push(
+          "Rent (if any): Rent is included to calculate rent relief",
+          "Allowable Expenses: Costs that are deductible in tax payabke profits such as NHS, LHS pension and so on"
+        )
       }
     });
 

@@ -7,7 +7,8 @@ const Category = () => {
   const navigate = useNavigate();
   const [select, setSelect] = useState<string[]>([]);
   const [data, setData] = useState<string[]>(category);
-  const [value, setValue] = useState <string>("")
+  const [value, setValue] = useState<string>("");
+  const [other, setOther] = useState<string>("");
 
   const handleSelection = (item: string) => {
     setSelect((prev) => [...prev, item]);
@@ -61,16 +62,33 @@ const Category = () => {
             ))
           )}
         </div>
+
         <div className="flex flex-col gap-5">
           <label className="font-medium text-md text-lg">Your Name</label>
           <input
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-            placeholder="First Name"
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+            placeholder="First Name / Business name"
             type="text"
             className="border-b outline-none p-2 lg:p-3"
           />
         </div>
+
+        {select.includes("Other") && (
+          <div className="flex flex-col gap-5">
+            <label className="font-medium text-md text-lg">
+              State Your Other Category
+            </label>
+            <input
+              value={other}
+              onChange={(e) => setOther(e.target.value)}
+              placeholder="Trust Fund"
+              type="text"
+              className="border-b outline-none p-2 lg:p-3"
+            />
+          </div>
+        )}
+
         <p className="text-red-600">
           Note Name details is required to draft a clear and concise document
           redressing the User tax-payable profit and tax to be/or paid
@@ -78,11 +96,11 @@ const Category = () => {
 
         <button
           onClick={() => {
-            if (select.length > 0 && value !== "") {
+            if (select.length > 0 && value !== "" && select.includes("Other") ? other !== "" : value !== "") {
               navigate("/income", {
-                state: { selected: select, name: value },
-              }, );
-            } else {
+                state: { selected: select, name: value, other: other },
+              });
+            }else {
               window.alert("invalid selection or input");
             }
           }}
