@@ -4,7 +4,7 @@ const Other = () => {
       <h1 className="font-medium text-xl">Other</h1>
 
       <div className="flex flex-wrap items-center gap-10">
-        <div className="flex flex-row items-center gap-5">
+        <div className="flex flex-row flex-wrap items-center gap-5">
           <label title="Total business income for the year">
             Annual Gross Revenue
           </label>
@@ -15,7 +15,7 @@ const Other = () => {
           />
         </div>
 
-        <div className="flex flex-row items-center gap-5">
+        <div className="flex flex-row flex-wrap items-center gap-5">
           <label title="Allowable business expenses under Nigerian tax law">
             Total Allowable Expenses (not optional)
           </label>
@@ -26,7 +26,7 @@ const Other = () => {
           />
         </div>
 
-        <div className="flex flex-row items-center gap-5">
+        <div className="flex flex-row flex-wrap items-center gap-5">
           <label title="Capital allowances claimable for the year">
             Rent (if any) Optional
           </label>

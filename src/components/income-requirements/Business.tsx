@@ -4,7 +4,7 @@ const Business = () => {
       <h1 className="font-medium text-xl">Business</h1>
 
       <div className="flex flex-wrap items-center gap-10">
-        <div className="flex flex-row items-center gap-5">
+        <div className="flex flex-row flex-wrap items-center gap-5">
           <label title="Total business income for the year">
             Annual Gross Revenue
           </label>
@@ -15,7 +15,7 @@ const Business = () => {
           />
         </div>
 
-        <div className="flex flex-row items-center gap-5">
+        <div className="flex flex-row flex-wrap items-center gap-5">
           <label title="Allowable business expenses under Nigerian tax law">
             Allowable Business Expenses
           </label>
@@ -26,7 +26,7 @@ const Business = () => {
           />
         </div>
 
-        <div className="flex flex-row items-center gap-5">
+        <div className="flex flex-row flex-wrap items-center gap-5">
           <label title="Capital allowances claimable for the year">
             Capital Allowances (Optional)
           </label>
@@ -37,7 +37,7 @@ const Business = () => {
           />
         </div>
 
-        <div className="flex flex-row items-center gap-5">
+        <div className="flex flex-row flex-wrap items-center gap-5">
           <label title="Previous years losses carried forward">
             Loss Brought Forward (Optional)
           </label>

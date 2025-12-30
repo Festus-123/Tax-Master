@@ -6,7 +6,7 @@ const EmployerPAYE = () => {
       <h1 className="font-medium text-xl">Employer (PAYE)</h1>
 
       <div className="flex flex-wrap items-center gap-10">
-        <div className="flex flex-row items-center gap-5">
+        <div className="flex flex-row flex-wrap items-center gap-5">
           <label title="Annual salary of one employee">
             Employee Gross Annual Salary
           </label>
@@ -17,7 +17,7 @@ const EmployerPAYE = () => {
           />
         </div>
 
-        <div className="flex flex-row items-center gap-5">
+        <div className="flex flex-row flex-wrap items-center gap-5">
           <label title="Employee pension contribution (usually 8%)">
             Employee Pension Contribution (Optional)
           </label>
@@ -28,7 +28,7 @@ const EmployerPAYE = () => {
           />
         </div>
 
-        <div className="flex flex-row items-center gap-5">
+        <div className="flex flex-row flex-wrap items-center gap-5">
           <label title="National Housing Fund contribution (2.5%)">
             NHF Contribution (Optional)
           </label>
@@ -39,7 +39,7 @@ const EmployerPAYE = () => {
           />
         </div>
 
-        <div className="flex flex-row items-center gap-5">
+        <div className="flex flex-row flex-wrap items-center gap-5">
           <label title="Other statutory reliefs if applicable">
             Other Statutory Reliefs (Optional)
           </label>
@@ -50,7 +50,7 @@ const EmployerPAYE = () => {
           />
         </div>
 
-        <div className="flex flex-row items-center gap-5">
+        <div className="flex flex-row flex-wrap items-center gap-5">
           <label title="Total number of employees">
             Number of Employees
           </label>

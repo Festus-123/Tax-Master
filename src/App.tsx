@@ -7,8 +7,12 @@ import TermsPolicies from "./components/terms-and-condition/TermsPolicies";
 import Category from "./components/category/Category";
 import Income from "./components/income/Income";
 
+// import a global state mangement system to manage data
+import formContext from "./context/formContext";
+
 export default function App() {
   return (
+    <formContext.Provider value={[]}>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Body />}>
@@ -19,5 +23,6 @@ export default function App() {
         </Route>
       </Routes>
     </BrowserRouter>
+    </formContext.Provider>
   );
 }
