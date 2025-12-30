@@ -1,4 +1,2 @@
 import { createContext } from "react";
-const formContext = createContext([])
-
-export default formContext;
+export const formContext = createContext< number | any>(null);

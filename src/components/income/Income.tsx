@@ -3,9 +3,11 @@ import EmployerPAYE from "../income-requirements/Employer";
 import Business from "../income-requirements/Business";
 import Other from "../income-requirements/Other";
 import { useLocation } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { formContext } from "../../context/formContext";
 
 const Income = () => {
+  const { result } = useContext(formContext);
   const { state } = useLocation();
   const selected = state?.selected;
   // const firstName = state?.name || "";
@@ -74,7 +76,7 @@ const Income = () => {
             </div>
           ))}
         </div>
-        <button className="bg-blue-700 hover:bg-blue-500  text-white text-center p-2 md:p-3 lg:p-4 rounded-md w-full cursor-pointer">
+        <button onClick={() => console.log(result)} className="bg-blue-700 hover:bg-blue-500  text-white text-center p-2 md:p-3 lg:p-4 rounded-md w-full cursor-pointer">
           Continue
         </button>
       </div>
