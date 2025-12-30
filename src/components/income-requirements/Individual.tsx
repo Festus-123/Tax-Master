@@ -1,8 +1,8 @@
-import { useContext, useState } from "react";
-import { formContext } from "../../context/formContext";
+import { useState } from "react";
+// import { formContext } from "../../context/formContext";
 
 const Individual = () => {
-    const {setResult} = useContext(formContext)
+    // const {setResult} = useContext(formContext)
     interface formData {
         grossIncome: number,
         rent: number,
@@ -18,12 +18,12 @@ const Individual = () => {
         LIP: 0
     })
     
-    const totalAmount = () => {
-        console.log("wworking")
-       const total = formData.grossIncome + ((formData.rent * 20) / 20) + formData.pension
-       console.log("total", total)
-       setResult(total)
-    }
+    // const totalAmount = () => {
+    //     console.log("wworking")
+    //    const total = formData.grossIncome + ((formData.rent * 20) / 20) + formData.pension
+    //    console.log("total", total)
+    //    setResult(total)
+    // }
   return (
     <div className="flex flex-col gap-10 border-b border-[#8080802e] py-4 lg:py-8">
       <h1 className="font-medium text-xl ">Individual</h1>
@@ -78,7 +78,7 @@ const Individual = () => {
             className="boder-none outline-none bg-[#80808018] p-2 lg:p-4 rounded-md"
           />
         </div>
-        <button onClick={totalAmount} className="cursor-pointer bg-[#8080801b] p-2 rounded-xl">Clock me</button>
+        {/* <button onClick={totalAmount} className="cursor-pointer bg-[#8080801b] p-2 rounded-xl">Clock me</button> */}
         {/* {setResult && totalAmount() && console.log(totalAmount()) } */}
       </div>
     </div>

@@ -12,6 +12,7 @@ const Income = () => {
   const selected = state?.selected;
   // const firstName = state?.name || "";
   const [requirement, setRequirements] = useState<string[]>([]);
+  const [showAll, setShowAl] = useState<boolean>(false)
 
   // Whenever selected changes, update the requirements
   useEffect(() => {
@@ -47,6 +48,10 @@ const Income = () => {
     made();
   }, [selected]);
 
+  const visibeRequirements = showAll 
+      ? requirement
+      : requirement.slice(0, 2)
+
   return (
     <div className="w-full lg:w-[80%] flex items-center justify-center p-4 lg:p-8 ">
       <div className=" w-full flex flex-col p-4 mt-10 lg:mt-0  bg-white rounded-md lg:p-8 gap-10">
@@ -69,12 +74,17 @@ const Income = () => {
             }
           })}
         </div>
-        <div className="p-2 lg:p-4">
-          {requirement.map((char, i) => (
+        <div className="p-2 lg:p-4 ">
+          {visibeRequirements.map((char, i) => (
             <div key={i} className="gap-2 py-1">
               <li className="text-red-600 font-medium">{char}</li>
             </div>
           ))}
+          <div>
+            {requirement.length > 2 && (
+              <span onClick={() => setShowAl(!showAll)} className="text-blue-600 cursor-pointer hover:text-blue-500">{showAll ? "Hide" : "...See more"}</span>
+            )}
+          </div>
         </div>
         <button onClick={() => console.log(result)} className="bg-blue-700 hover:bg-blue-500  text-white text-center p-2 md:p-3 lg:p-4 rounded-md w-full cursor-pointer">
           Continue
