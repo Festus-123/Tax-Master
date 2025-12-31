@@ -1,10 +1,10 @@
-import {  useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 // import { formContext } from "../../context/formContext";
 import Input from "../input/Input";
 import {
-  // IndividualTax,
-  type indvidualRues,
+  IndividualTax,
+  type IndividualInputs,
 } from "../../services/taxCalculator";
 
 const Individual = () => {
@@ -13,7 +13,10 @@ const Individual = () => {
   const option = state?.option;
   console.log(option);
 
-  const [formData, setFormData] = useState<indvidualRues>({
+  const [hasPension, setHasPension] = useState(false)
+  const [hasNHF, setHasNHF] = useState(false)
+
+  const [formData, setFormData] = useState<IndividualInputs>({
     grossIncome: 0,
     basicSalary: 0,
     rent: 0,
@@ -22,11 +25,15 @@ const Individual = () => {
     NHF: 2.5
   });
 
-  // useEffect(() => {
-  //   const made = () => IndividualTax(formData, 40);
-  //   made();
-  //   console.log(made());
-  // }, [formData]);
+  useEffect(() => {      
+    const made = () => IndividualTax(formData, {
+      isSalary: option === "Salary earner",
+      hasPension,
+      hasNHF
+    } );
+    made();
+    console.log(made());
+  }, [formData, option, hasPension, hasNHF]);
 
   return (
     <div className="flex flex-col gap-10 border-b border-[#8080802e] py-4 lg:py-8">
@@ -69,6 +76,7 @@ const Individual = () => {
           placeholder={"--- ---"}
           title={"Life insurance (premium) Optional"}
         />
+
         {option !== "Salary earner" && (
           <div className="flex flex-wrap items-center gap-10">
         <Input
@@ -96,13 +104,13 @@ const Individual = () => {
             <h1 className="text-md">Select if you contribute to any:</h1>
             <div className="flex flex-row items-center gap-10 ">
               <div className="flex flex-row itemms-center gap-2 ">
-                <input id="pension" type="checkbox" />
+                <input checked={hasPension} onChange={(e) => setHasPension(e.target.checked)} id="pension" type="checkbox" />
                 <label htmlFor="pension" className="cursor-pointer">
                   Pension
                 </label>
               </div>
               <div className="flex flex-row itemms-center gap-2">
-                <input id="NHF" type="checkbox" className="" />
+                <input checked={hasNHF} onChange={(e) => setHasNHF(e.target.checked)} id="NHF" type="checkbox" className="" />
                 <label htmlFor="NHF" className="cursor-pointer">
                   NHF
                 </label>

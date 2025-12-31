@@ -1,66 +1,59 @@
-export interface indvidualRues {
-  grossIncome: number
-  basicSalary: number
-  rent: number
-  LIP?: number
-  pension?: number
-  NHF?: number
-}
-
-interface deductibleResults {
+export interface IndividualInputs {
+  grossIncome: number;
   basicSalary: number;
-  taxDeductible: number;
+  rent: number;
+  LIP?: number;
+  pension: number;
+  NHF: number;
 }
 
-export function individualDeductibleCosts(
-  input: indvidualRues,
-  percentage: number,
-  known: boolean = false
-): deductibleResults {
-  let rentRelief = (input.rent * 20) / 100;
-  if (rentRelief >= 500000) {
-    rentRelief = 500000;
-  }
-  let basicSalary = input.basicSalary;
-
-  if (!known) {
-    basicSalary = (input.basicSalary * percentage) / 100;
-  }
-  const pensionRelief = (input.basicSalary * 8) / 100;
-  const NHFRelief = (input.basicSalary * 2.5) / 100;
-  const taxDeductible = rentRelief + pensionRelief + NHFRelief;
-  return { basicSalary, taxDeductible };
+export interface Options {
+  isSalary: boolean;
+  hasPension: boolean;
+  hasNHF: boolean;
 }
 
-export function IndividualTax(input: indvidualRues, percentage: number): number[] {
-  const deductible = individualDeductibleCosts(input, percentage, false);
-  const taxableProfit = input.grossIncome - deductible.taxDeductible;
-  const tax: number[] = [];
-  if (taxableProfit > 0) {
-    if (taxableProfit > 800000) {
-      tax.push((800000 * 0) / 100);
-    }
-    let remainder = taxableProfit - 800000;
-    if (remainder > 800000 && remainder <= 2200000) {
-      tax.push((2200000 * 15) / 100);
-    }
-    remainder = remainder - 3000000;
-    if (remainder > 2200000 && remainder <= 12000000) {
-      tax.push((9000000 * 18) / 100);
-    }
-    remainder = remainder - 12000000;
-    if (remainder > 9000000 && remainder <= 25000000) {
-      tax.push((13000000 * 21) / 100);
-    }
-    remainder = remainder - 25000000;
-    if (remainder > 13000000 && remainder <= 50000000) {
-      tax.push((25000000 * 23) / 100);
-    }
-    remainder = remainder - 50000000;
-    if (remainder > 50000000) {
-      tax.push((50000000 * 25) / 100);
-    }
-  }
-  return tax;
-}
+const taxBands = [
+  { limit: 800000, rate: 0 },
+  { limit: 2200000, rate: 15 },
+  { limit: 9000000, rate: 18 },
+  { limit: 13000000, rate: 21 },
+  { limit: 25000000, rate: 23 },
+  { limit: Infinity, rate: 25 },
+];
 
+export function IndividualTax(input: IndividualInputs, options: Options) {
+  const CRA =
+    input.grossIncome * 0.2 + Math.max(input.grossIncome * 0.01, 200000);
+  const rentRelief = Math.min(input.rent * 0.2, 500_000);
+
+  let pensionRelief = 0;
+  let NHFRelief = 0;
+
+  if (options.isSalary) {
+    if (options.hasPension) pensionRelief = input.basicSalary * 0.08;
+
+    if (options.hasNHF) NHFRelief = input.basicSalary * 0.025;
+  } else {
+    pensionRelief = (input.grossIncome * input.pension) / 100;
+    NHFRelief = (input.grossIncome * input.NHF) / 100;
+  }
+
+  const deductibleAmount =
+    CRA + rentRelief + pensionRelief + NHFRelief + (input.LIP ?? 0);
+
+  let taxableProfit = input.grossIncome - deductibleAmount;
+
+  let totalTax = 0;
+
+  taxBands.map(({ limit, rate }) => {
+    if (taxableProfit <= 0) return;
+
+    const taxableAmount = Math.min(taxableProfit, limit);
+    totalTax += (taxableAmount * rate) / 100;
+    taxableProfit -= taxableAmount;
+  });
+
+  console.log(totalTax);
+  return totalTax;
+}
