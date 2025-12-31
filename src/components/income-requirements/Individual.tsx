@@ -41,7 +41,7 @@ const Individual = () => {
       <div className="flex flex-wrap items-center gap-10">
         <Input
           value={formData.grossIncome}
-          onChnage={(e: React.ChangeEvent<HTMLInputElement>) =>
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setFormData({ ...formData, grossIncome: Number(e.target.value) })
           }
           placeholder={"840,000"}
@@ -52,7 +52,7 @@ const Individual = () => {
           <Input
             title={"Basic Salary"}
             value={formData.basicSalary}
-            onChnage={(e: React.ChangeEvent<HTMLInputElement>) =>
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setFormData({ ...formData, basicSalary: Number(e.target.value) })
             }
             placeholder={"600,000"}
@@ -61,7 +61,7 @@ const Individual = () => {
 
         <Input
           value={formData.rent}
-          onChnage={(e: React.ChangeEvent<HTMLInputElement>) =>
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setFormData({ ...formData, rent: Number(e.target.value) })
           }
           placeholder={"200,000"}
@@ -70,7 +70,7 @@ const Individual = () => {
 
         <Input
           value={formData.LIP}
-          onChnage={(e: React.ChangeEvent<HTMLInputElement>) =>
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setFormData({ ...formData, LIP: Number(e.target.value) })
           }
           placeholder={"--- ---"}
@@ -81,7 +81,7 @@ const Individual = () => {
           <div className="flex flex-wrap items-center gap-10">
         <Input
           value={formData.pension}
-          onChnage={(e: React.ChangeEvent<HTMLInputElement>) =>
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setFormData({ ...formData, pension: Number(e.target.value) })
           }
           placeholder={"8"}
@@ -89,7 +89,7 @@ const Individual = () => {
           />
         <Input
           value={formData.NHF}
-          onChnage={(e: React.ChangeEvent<HTMLInputElement>) =>
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setFormData({ ...formData, NHF: Number(e.target.value) })
           }
           placeholder={"2.5"}

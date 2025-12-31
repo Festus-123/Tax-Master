@@ -2,7 +2,7 @@ export interface IndividualInputs {
   grossIncome: number;
   basicSalary: number;
   rent: number;
-  LIP?: number;
+  LIP: number;
   pension: number;
   NHF: number;
 }
