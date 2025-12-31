@@ -22,7 +22,8 @@ const Income = () => {
       if (item === "Individual") {
         newRequirements.push(
           "Rent (if any): Rent is included to calculate rent relief",
-          "Life insurance (Premium) Optional: Only premiums paid for life assurance policies covering the taxpayer or spouse are eligible for tax relief, subject to verification under the 2026 Nigeria Tax Act and FIRS guidelines."
+          "Life insurance (Premium) Optional: Only premiums paid for life assurance policies covering the taxpayer or spouse are eligible for tax relief, subject to verification under the 2026 Nigeria Tax Act and FIRS guidelines.",
+          "NHF: national housing fund to calculate deductible costs."
         );
       } else if (item === "Employer(PAYE)") {
         newRequirements.push(

@@ -9,6 +9,7 @@ const Category = () => {
   const [data, setData] = useState<string[]>(category);
   const [value, setValue] = useState<string>("");
   const [other, setOther] = useState<string>("");
+  const [option, setOption] = useState("Salary earner")
 
   const handleSelection = (item: string) => {
     setSelect((prev) => [...prev, item]);
@@ -73,6 +74,16 @@ const Category = () => {
             className="border-b outline-none p-2 lg:p-3"
           />
         </div>
+        {select.includes("Individual") && (
+          <div className="flex flex-row items-center gap-5">
+            <label htmlFor="">Individual Category</label>
+            <select value={option} onChange={(e) => setOption(e.target.value)} className="border rounded-lg p-3 lg:p-4">
+              <option value="Salary earner">Salary earner</option>
+              <option value="Self Employed">Self employed</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+        )}
 
         {select.includes("Other") && (
           <div className="flex flex-col gap-5">
@@ -98,7 +109,7 @@ const Category = () => {
           onClick={() => {
             if (select.length > 0 && value !== "" && select.includes("Other") ? other !== "" : value !== "") {
               navigate("/income", {
-                state: { selected: select, name: value, other: other },
+                state: { selected: select, name: value, other: other, option: option },
               });
             }else {
               window.alert("invalid selection or input");
