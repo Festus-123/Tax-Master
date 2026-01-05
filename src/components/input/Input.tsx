@@ -15,7 +15,7 @@ const Input = ({ value, onChange, placeholder, title }: props) => {
         onChange={onChange}
         placeholder={placeholder}
         type="number"
-        className="boder-none outline-none bg-[#80808018] p-2 lg:p-4 rounded-md lg:w-[80%] md:w-[60%]"
+        className="boder-none outline-none bg-[#80808018] p-3 lg:p-4 rounded-md lg:w-[80%] md:w-[80%]"
       />
     </div>
   );

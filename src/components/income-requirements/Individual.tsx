@@ -11,10 +11,10 @@ const Individual = () => {
   // const {setResult} = useContext(formContext)
   const { state } = useLocation();
   const option = state?.option;
-  console.log(option);
+  // console.log(option);
 
-  const [hasPension, setHasPension] = useState(false)
-  const [hasNHF, setHasNHF] = useState(false)
+  const [hasPension, setHasPension] = useState(false);
+  const [hasNHF, setHasNHF] = useState(false);
 
   const [formData, setFormData] = useState<IndividualInputs>({
     grossIncome: 0,
@@ -22,15 +22,16 @@ const Individual = () => {
     rent: 0,
     LIP: 0,
     pension: 8,
-    NHF: 2.5
+    NHF: 2.5,
   });
 
-  useEffect(() => {      
-    const made = () => IndividualTax(formData, {
-      isSalary: option === "Salary earner",
-      hasPension,
-      hasNHF
-    } );
+  useEffect(() => {
+    const made = () =>
+      IndividualTax(formData, {
+        isSalary: option === "Salary earner",
+        hasPension,
+        hasNHF,
+      });
     made();
     console.log(made());
   }, [formData, option, hasPension, hasNHF]);
@@ -38,7 +39,7 @@ const Individual = () => {
   return (
     <div className="flex flex-col gap-10 border-b border-[#8080802e] py-4 lg:py-8">
       <h1 className="font-medium text-xl ">Individual</h1>
-      <div className="flex flex-wrap items-center gap-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-10">
         <Input
           value={formData.grossIncome}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -78,46 +79,58 @@ const Individual = () => {
         />
 
         {option !== "Salary earner" && (
-          <div className="flex flex-wrap items-center gap-10">
-        <Input
-          value={formData.pension}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setFormData({ ...formData, pension: Number(e.target.value) })
-          }
-          placeholder={"8"}
-          title={"Pension (in %) Optional"}
+          <Input
+            value={formData.pension}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setFormData({ ...formData, pension: Number(e.target.value) })
+            }
+            placeholder={"8"}
+            title={"Pension (in %) Optional"}
           />
-        <Input
-          value={formData.NHF}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setFormData({ ...formData, NHF: Number(e.target.value) })
-          }
-          placeholder={"2.5"}
-          title={"NHF (in %) Optional"}
+        )}
+
+        {option !== "Salary earner" && (
+          <Input
+            value={formData.NHF}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setFormData({ ...formData, NHF: Number(e.target.value) })
+            }
+            placeholder={"2.5"}
+            title={"NHF (in %) Optional"}
           />
-          </div>
         )}
       </div>
-
-        {option === "Salary earner" && (
-          <div className="flex flex-col gap-10 ">
-            <h1 className="text-md">Select if you contribute to any:</h1>
-            <div className="flex flex-row items-center gap-10 ">
-              <div className="flex flex-row itemms-center gap-2 ">
-                <input checked={hasPension} onChange={(e) => setHasPension(e.target.checked)} id="pension" type="checkbox" />
-                <label htmlFor="pension" className="cursor-pointer">
-                  Pension
-                </label>
-              </div>
-              <div className="flex flex-row itemms-center gap-2">
-                <input checked={hasNHF} onChange={(e) => setHasNHF(e.target.checked)} id="NHF" type="checkbox" className="" />
-                <label htmlFor="NHF" className="cursor-pointer">
-                  NHF
-                </label>
-              </div>
+        
+      {option === "Salary earner" && (
+        <div className="flex flex-col gap-10 ">
+          <h1 className="text-md">Select if you contribute to any:</h1>
+          <div className="flex flex-row items-center gap-10 ">
+            <div className="flex flex-row itemms-center gap-2 ">
+              <input
+                checked={hasPension}
+                onChange={(e) => setHasPension(e.target.checked)}
+                id="pension"
+                type="checkbox"
+              />
+              <label htmlFor="pension" className="cursor-pointer">
+                Pension
+              </label>
+            </div>
+            <div className="flex flex-row itemms-center gap-2">
+              <input
+                checked={hasNHF}
+                onChange={(e) => setHasNHF(e.target.checked)}
+                id="NHF"
+                type="checkbox"
+                className=""
+              />
+              <label htmlFor="NHF" className="cursor-pointer">
+                NHF
+              </label>
             </div>
           </div>
-        )}
+        </div>
+      )}
     </div>
   );
 };

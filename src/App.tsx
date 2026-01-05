@@ -7,6 +7,7 @@ import LandingPage from "./components/landing-page/LandingPage";
 import TermsPolicies from "./components/terms-and-condition/TermsPolicies";
 import Category from "./components/category/Category";
 import Income from "./components/income/Income";
+import TaxPreview from "./components/tax-preview/TaxPreview";
 
 // import a global state mangement system to manage data
 import {formContext} from "./context/formContext";
@@ -25,6 +26,7 @@ export default function App() {
           <Route path="terms-and-conditions" element={<TermsPolicies />}/>
           <Route path="category" element={<Category />}/>
           <Route path="income" element={<Income />}/>
+          <Route path="preview" element={<TaxPreview />}/>
         </Route>
       </Routes>
     </BrowserRouter>

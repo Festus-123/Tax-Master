@@ -9,7 +9,8 @@ const Category = () => {
   const [data, setData] = useState<string[]>(category);
   const [value, setValue] = useState<string>("");
   const [other, setOther] = useState<string>("");
-  const [option, setOption] = useState("Salary earner")
+  const [option, setOption] = useState("Salary earner");
+  const [businessOption, setBusinessOption] = useState("Salary earner");
 
   const handleSelection = (item: string) => {
     setSelect((prev) => [...prev, item]);
@@ -52,7 +53,7 @@ const Category = () => {
           {select.length === 0 ? (
             <p>No options selected</p>
           ) : (
-            select.map((char, i) => (
+            [...select].sort().map((char, i) => (
               <div
                 key={i}
                 onClick={() => handleRemoveSelection(char)}
@@ -74,16 +75,38 @@ const Category = () => {
             className="border-b outline-none p-2 lg:p-3"
           />
         </div>
-        {select.includes("Individual") && (
-          <div className="flex flex-row items-center gap-5">
-            <label htmlFor="">Individual Category</label>
-            <select value={option} onChange={(e) => setOption(e.target.value)} className="border rounded-lg p-3 lg:p-4">
-              <option value="Salary earner">Salary earner</option>
-              <option value="Self Employed">Self employed</option>
-              <option value="Other">Other</option>
-            </select>
-          </div>
-        )}
+
+        <div className="flex flex-row items-center gap-5 py-2 lg:py-3">
+          {select.includes("Individual") && (
+            <div className="flex flex-row items-center gap-5">
+              <label htmlFor="">Individual Category</label>
+              <select
+                value={option}
+                onChange={(e) => setOption(e.target.value)}
+                className="border rounded-lg p-3 lg:p-4"
+              >
+                <option value="Salary earner">Salary earner</option>
+                <option value="Self Employed">Self employed</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          )}
+
+          {select.includes("Business") && (
+            <div className="flex flex-row items-center gap-5">
+              <label htmlFor="">Business Tax Category</label>
+              <select
+                value={businessOption}
+                onChange={(e) => setBusinessOption(e.target.value)}
+                className="border rounded-lg p-3 lg:p-4"
+              >
+                <option value="Salary earner">Company Income TAX (CIT)</option>
+                <option value="Self Employed">Value Added TAX (VAT)</option>
+                <option value="Other">Witholding Tax (WTH)</option>
+              </select>
+            </div>
+          )}
+        </div>
 
         {select.includes("Other") && (
           <div className="flex flex-col gap-5">
@@ -107,11 +130,21 @@ const Category = () => {
 
         <button
           onClick={() => {
-            if (select.length > 0 && value !== "" && select.includes("Other") ? other !== "" : value !== "") {
+            if (
+              select.length > 0 &&
+              value !== "" &&
+              select.includes("Other") &&
+              other !== ""
+            ) {
               navigate("/income", {
-                state: { selected: select, name: value, other: other, option: option },
+                state: {
+                  selected: select,
+                  name: value,
+                  other: other,
+                  option: option,
+                },
               });
-            }else {
+            } else {
               window.alert("invalid selection or input");
             }
           }}
