@@ -15,8 +15,6 @@ const Income = () => {
   const [requirement, setRequirements] = useState<string[]>([]);
   const [showAll, setShowAl] = useState<boolean>(false);
 
-  // Whenever selected changes, update the requirements
-  
   useEffect(() => {
     const made = () => setRequirements(requirementRules(selected));
     made();
