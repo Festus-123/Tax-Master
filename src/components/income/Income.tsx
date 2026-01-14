@@ -4,12 +4,11 @@ import Business from "../income-requirements/Business";
 import Other from "../income-requirements/Other";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import { useState, useEffect, useContext } from "react";
-import { formContext } from "../../context/formContext";
+import { useState, useEffect } from "react";
+import { requirementRules } from "../requirements/requirement";
 
 const Income = () => {
   const navigate = useNavigate();
-  const { result } = useContext(formContext);
   const { state } = useLocation();
   const selected = state?.selected;
   // const firstName = state?.name || "";
@@ -17,37 +16,9 @@ const Income = () => {
   const [showAll, setShowAl] = useState<boolean>(false);
 
   // Whenever selected changes, update the requirements
+  
   useEffect(() => {
-    const newRequirements: string[] = [];
-
-    selected.forEach((item: string) => {
-      if (item === "Individual") {
-        newRequirements.push(
-          "Rent (if any): Rent is included to calculate rent relief",
-          "Life insurance (Premium) Optional: Only premiums paid for life assurance policies covering the taxpayer or spouse are eligible for tax relief, subject to verification under the 2026 Nigeria Tax Act and FIRS guidelines.",
-          "NHF: national housing fund to calculate deductible costs."
-        );
-      } else if (item === "Employer(PAYE)") {
-        newRequirements.push(
-          "Employee Pension Contribution (Optional) – A portion of the employee’s salary set aside for their retirement, reducing taxable income.",
-          "NHF Contribution (Optional) – A mandatory contribution to the National Housing Fund that helps employees access affordable housing.",
-          "Other Statutory Reliefs (Optional) – Any additional legal deductions that lower the employee’s taxable income, like social security or union dues."
-        );
-      } else if (item === "Business") {
-        newRequirements.push(
-          "Allowable Business Expenses – Costs your business incurs in running daily operations, recognized by tax law, reducing taxable profit.",
-          "Capital Allowances (Optional) – Deduction for business assets like machinery or equipment, reducing taxable profit.",
-          "Loss Brought Forward (Optional) – Losses from previous years carried forward to offset current year profits, lowering tax liability."
-        );
-      } else if (item === "Other") {
-        newRequirements.push(
-          "Rent (if any): Rent is included to calculate rent relief",
-          "Allowable Expenses: Costs that are deductible in tax payabke profits such as NHS, LHS pension and so on"
-        );
-      }
-    });
-
-    const made = () => setRequirements(newRequirements);
+    const made = () => setRequirements(requirementRules(selected));
     made();
   }, [selected]);
 
@@ -83,7 +54,6 @@ const Income = () => {
             </div>
           ))}
           <div>
-            gi
             {requirement.length > 2 && (
               <span
                 onClick={() => setShowAl(!showAll)}

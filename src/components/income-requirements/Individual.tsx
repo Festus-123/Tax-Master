@@ -1,17 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useLocation } from "react-router-dom";
-// import { formContext } from "../../context/formContext";
 import Input from "../input/Input";
+import { formContext } from "../../context/formContext";
 import {
   IndividualTax,
   type IndividualInputs,
 } from "../../services/taxCalculator";
 
 const Individual = () => {
-  // const {setResult} = useContext(formContext)
+  const { setIndividualResult } = useContext(formContext)
   const { state } = useLocation();
   const option = state?.option;
-  // console.log(option);
 
   const [hasPension, setHasPension] = useState(false);
   const [hasNHF, setHasNHF] = useState(false);
@@ -26,20 +25,19 @@ const Individual = () => {
   });
 
   useEffect(() => {
-    const made = () =>
+    const made =
       IndividualTax(formData, {
         isSalary: option === "Salary earner",
         hasPension,
         hasNHF,
       });
-    made();
-    console.log(made());
-  }, [formData, option, hasPension, hasNHF]);
+      setIndividualResult(made)
+  }, [formData, option, hasPension, hasNHF, setIndividualResult]);
 
   return (
     <div className="flex flex-col gap-10 border-b border-[#8080802e] py-4 lg:py-8">
       <h1 className="font-medium text-xl ">Individual</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10">
         <Input
           value={formData.grossIncome}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>

@@ -58,6 +58,66 @@ export function IndividualTax(input: IndividualInputs, options: Options) {
   return totalTax;
 }
 
+export interface PAYEInputs {
+  grossIncome: number;   
+  basicSalary: number;
+  rent: number;
+  LIP?: number;
+  otherRelief: number;
+}
+
+export interface PAYEOptions {
+  hasPension: boolean;
+  hasNHF: boolean;
+}
+
+export function EmployerPAYETax(
+  input: PAYEInputs,
+  options: PAYEOptions
+) {
+  const { grossIncome, basicSalary, rent = 0, LIP = 0, otherRelief } = input;
+
+  // 1️⃣ CRA (mandatory)
+  const CRA =
+    grossIncome * 0.2 + Math.max(grossIncome * 0.01, 200_000);
+
+  // 2️⃣ Rent relief (20% capped at ₦500k)
+  const rentRelief = Math.min(rent * 0.2, 500_000);
+
+  // 3️⃣ Statutory deductions
+  let pensionRelief = 0;
+  let NHFRelief = 0;
+
+  if (options.hasPension) {
+    pensionRelief = basicSalary * 0.08; // Employee portion
+  }
+
+  if (options.hasNHF) {
+    NHFRelief = basicSalary * 0.025;
+  }
+
+  // 4️⃣ Total deductibles
+  const deductibleAmount =
+    CRA + rentRelief + pensionRelief + NHFRelief + LIP + otherRelief;
+
+  let taxableIncome = grossIncome - deductibleAmount;
+
+  // 5️⃣ Apply PAYE tax bands
+  let totalPAYE = 0;
+
+  taxBands.forEach(({ limit, rate }) => {
+    if (taxableIncome <= 0) return;
+
+    const taxableAmount = Math.min(taxableIncome, limit);
+    totalPAYE += (taxableAmount * rate) / 100;
+    taxableIncome -= taxableAmount;
+  });
+
+  console.log("Employer(PAYE)", totalPAYE)
+  return totalPAYE;
+}
+
+
 export interface OthersInput {
     grossRevenue: number,
     expenses: number,
@@ -129,3 +189,54 @@ export function BusinessTax (input: businessRule) {
     console.log("BusinessTax",totalTax);
     return totalTax;
 }
+
+export interface VATRules {
+    grossPrice: number,
+    rate: number,
+    isInclusive?: boolean,
+    isExclusive?: boolean,
+}
+export function businessVAT(input: VATRules) {
+  const { grossPrice, rate, isInclusive, isExclusive } = input;
+
+  if (rate <= 0) {
+    return {
+      vat: 0,
+      net: grossPrice,
+      total: grossPrice,
+    };
+  }
+
+  if (isExclusive) {
+    const vat = grossPrice * rate;
+    // const total = grossPrice + vat;
+
+    return vat
+  }
+  // inclusive
+  if(isInclusive){
+
+    const vat = grossPrice * (rate / (1 + rate));
+    // const net = grossPrice - vat;
+    
+    return vat;
+  }
+}
+
+export interface WHTRules {
+  grossAmount: number,
+  rate: number
+}
+
+export function businessWHT(input: WHTRules) {
+  const { grossAmount, rate } = input;
+
+  const wht = grossAmount * rate;
+  const netPayable = grossAmount - wht;
+
+  return {
+    wht,
+    netPayable,
+  };
+}
+

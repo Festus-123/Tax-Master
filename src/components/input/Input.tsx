@@ -1,6 +1,6 @@
 
 type props = {
-    value: number;
+    value?: number;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     placeholder: string;
     title: string;
@@ -8,7 +8,7 @@ type props = {
 
 const Input = ({ value, onChange, placeholder, title }: props) => {
   return (
-    <div className="flex flex-row flex-wrap items-center gap-5 ">
+    <div className="grid grid-cols-1 items-center gap-5 w-full">
       <label title="monthly salary x 12 months">{title}</label>
       <input
         value={value}

@@ -10,7 +10,7 @@ const Category = () => {
   const [value, setValue] = useState<string>("");
   const [other, setOther] = useState<string>("");
   const [option, setOption] = useState("Salary earner");
-  const [businessOption, setBusinessOption] = useState("Salary earner");
+  const [businessOption, setBusinessOption] = useState("Company Incomee Tax");
 
   const handleSelection = (item: string) => {
     setSelect((prev) => [...prev, item]);
@@ -100,9 +100,9 @@ const Category = () => {
                 onChange={(e) => setBusinessOption(e.target.value)}
                 className="border rounded-lg p-3 lg:p-4"
               >
-                <option value="Salary earner">Company Income TAX (CIT)</option>
-                <option value="Self Employed">Value Added TAX (VAT)</option>
-                <option value="Other">Witholding Tax (WTH)</option>
+                <option value="CIT">Company Income TAX (CIT)</option>
+                <option value="VAT">Value Added TAX (VAT)</option>
+                <option value="WHT">Witholding Tax (WTH)</option>
               </select>
             </div>
           )}
@@ -132,7 +132,7 @@ const Category = () => {
           onClick={() => {
             if (
               select.length > 0 &&
-              value !== "" &&
+              value !== "" ||
               select.includes("Other") &&
               other !== ""
             ) {
@@ -142,6 +142,7 @@ const Category = () => {
                   name: value,
                   other: other,
                   option: option,
+                  busienssOption: businessOption,
                 },
               });
             } else {

@@ -1,12 +1,19 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { useLocation } from "react-router-dom";
 import { FaXmark } from "react-icons/fa6";
+import { formContext } from "../../context/formContext";
 import Input from "../input/Input";
+import VAT from "../VAT/VAT";
+import WHT from "../WHT/WHT"
 import {
   BusinessTax,
   type businessRule,
 } from "../../services/taxCalculator";
 
 const Business = () => {
+  const { state} = useLocation();
+  const { setBusinessResult } = useContext(formContext)
+  const busienssOption = state?.busienssOption;
   const [select, setSelect] = useState<string[]>([]);
   const [array, setArray] = useState<string[]>([
     "Premises Fee",
@@ -29,10 +36,9 @@ const Business = () => {
   });
 
   useEffect(() => {
-    const made  = () => BusinessTax(formData);
-    made()
-    console.log(made())
-  }, [formData]);
+    const made = BusinessTax(formData);
+    setBusinessResult(made)
+  }, [formData, setBusinessResult]);
 
   const handleSelect = (item: string) => {
     setSelect((prev) => [...prev, item]);
@@ -44,10 +50,14 @@ const Business = () => {
     setSelect((prev) => prev.filter((i) => i !== item));
   };
 
+  if(busienssOption === "CIT") return;
+  if(busienssOption === "VAT") return <VAT />
+  if(busienssOption === "WHT") return <WHT />
+
   return (
     <div className="flex flex-col gap-10 border-b border-[#8080802e] py-4 lg:py-8">
       <h1 className="font-medium text-xl">Business</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-10">
+      <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-10">
         <Input
           title="Anual Gross Revenue"
           placeholder="100,000,000"
@@ -77,9 +87,10 @@ const Business = () => {
             setFormData({ ...formData, lossBrougth: Number(e.target.value) })
           }
         />
-        <div className="relative flex flex-col col-span-2 gap-5">
+
+        <div className="relative flex flex-col md:col-span-2 gap-5">
           <h1 className="font-medium">Total Allowable Expenses</h1>
-          <div className="flex flex-row items-start gap-5 border-b border-[#80808060] py-2 lg:py-4">
+          <div className="flex flex-row flex-wrap items-start gap-5 border-b border-[#80808060] py-2 lg:py-4">
             {array.length === 0 ? (
               <p>All Options Selected</p>
             ) : (

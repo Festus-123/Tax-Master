@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from 'react';
 import Input from "../input/Input";
+import { formContext } from "../../context/formContext";
 import { OtherTax, type OthersInput } from "../../services/taxCalculator";
 
 const Other = () => {
+  const { setOtherResult } = useContext(formContext)
   const [formData, setFormData] = useState<OthersInput>({
     grossRevenue: 0,
     expenses: 0,
@@ -10,8 +12,9 @@ const Other = () => {
   });
 
   useEffect(() => {
-    OtherTax(formData)
-  }, [formData])
+    const made = OtherTax(formData)
+    setOtherResult(made)
+  }, [formData, setOtherResult])
 
   return (
     <div className="flex flex-col gap-10 border-b border-[#8080802e] py-4 lg:py-8">
