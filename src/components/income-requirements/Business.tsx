@@ -62,7 +62,7 @@ const Business = () => {
         <Input
           title="Anual Gross Revenue"
           placeholder="100,000,000"
-          value={formData.grossRevenue}
+          // value={formData.grossRevenue}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setFormData({ ...formData, grossRevenue: Number(e.target.value) })
           }
@@ -71,7 +71,7 @@ const Business = () => {
         <Input
           title="Capital Allowance (Optional)"
           placeholder="--- ---"
-          value={formData.capitalAllowance}
+          // value={formData.capitalAllowance}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setFormData({
               ...formData,
@@ -83,7 +83,7 @@ const Business = () => {
         <Input
           title="Loss Brougth Forward (Optioanl)"
           placeholder="--- ---"
-          value={formData.lossBrougth}
+          // value={formData.lossBrougth}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setFormData({ ...formData, lossBrougth: Number(e.target.value) })
           }
@@ -124,7 +124,7 @@ const Business = () => {
                 <Input
                   title={char}
                   placeholder={"--- ---"}
-                  value={formData.expenses[key] ?? 0}
+                  // value={formData.expenses[key] ?? 0}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     setFormData({
                       ...formData,

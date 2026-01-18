@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { category } from "../../data/data";
 import { FaXmark } from "react-icons/fa6";
+import toast from "react-hot-toast";
 
 const Category = () => {
   const navigate = useNavigate();
@@ -13,9 +14,14 @@ const Category = () => {
   const [businessOption, setBusinessOption] = useState("Company Incomee Tax");
 
   const handleSelection = (item: string) => {
+    if(select.length >= 1){
+      toast("Multiple document feature is not available Yet")
+      return;
+    }
     setSelect((prev) => [...prev, item]);
     setData((prev) => prev.filter((i) => i !== item));
   };
+
   const handleRemoveSelection = (item: string) => {
     setData((prev) => [...prev, item]);
     setSelect((prev) => prev.filter((i) => i !== item));
@@ -76,9 +82,9 @@ const Category = () => {
           />
         </div>
 
-        <div className="flex flex-row items-center gap-5 py-2 lg:py-3">
+        <div className="flex flex-row flex-wrap items-center gap-5 py-2 md:py-3">
           {select.includes("Individual") && (
-            <div className="flex flex-row items-center gap-5">
+            <div className="flex flex-col gap-3 md:items-center md:flex-row md:gap-4">
               <label htmlFor="">Individual Category</label>
               <select
                 value={option}
@@ -93,7 +99,7 @@ const Category = () => {
           )}
 
           {select.includes("Business") && (
-            <div className="flex flex-row items-center gap-5">
+            <div className="flex flex-col gap-3 md:items-center md:flex-row md:gap-4">
               <label htmlFor="">Business Tax Category</label>
               <select
                 value={businessOption}
@@ -131,10 +137,8 @@ const Category = () => {
         <button
           onClick={() => {
             if (
-              select.length > 0 &&
-              value !== "" ||
-              select.includes("Other") &&
-              other !== ""
+              (select.length > 0 && value !== "") ||
+              (select.includes("Other") && other !== "")
             ) {
               navigate("/income", {
                 state: {
@@ -146,7 +150,7 @@ const Category = () => {
                 },
               });
             } else {
-              window.alert("invalid selection or input");
+              toast.error("invalid selection or input");
             }
           }}
           className="bg-blue-700 hover:bg-blue-500  text-white text-center p-2 md:p-3 lg:p-4 rounded-md w-full cursor-pointer"

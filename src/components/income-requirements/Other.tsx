@@ -23,7 +23,7 @@ const Other = () => {
         <Input
           title="Annual Gross Revenue"
           placeholder="5000_000"
-          value={formData.grossRevenue}
+          // value={formData.grossRevenue}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setFormData({ ...formData, grossRevenue: Number(e.target.value) })
           }
@@ -32,7 +32,7 @@ const Other = () => {
         <Input
           title="Total Allowable Expenses"
           placeholder="2000_000"
-          value={formData.expenses}
+          // value={formData.expenses}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setFormData({ ...formData, expenses: Number(e.target.value) })
           }
@@ -41,7 +41,7 @@ const Other = () => {
         <Input
           title="Rent (if any) Optional"
           placeholder="--- ---"
-          value={formData.rent}
+          // value={formData.rent}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setFormData({ ...formData, rent: Number(e.target.value) })
           }

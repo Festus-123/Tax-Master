@@ -31,7 +31,7 @@ const EmployerPAYE = () => {
         <Input
           title="Employee Gross Anual Salary"
           placeholder="1,000,000"
-          value={formData.grossIncome}
+          // value={formData.grossIncome}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setFormData({ ...formData, grossIncome: Number(e.target.value) })
           }
@@ -40,7 +40,7 @@ const EmployerPAYE = () => {
         <Input
           title="Basic Salary)"
           placeholder="% of Gross Salary"
-          value={formData.basicSalary}
+          // value={formData.basicSalary}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setFormData({ ...formData, basicSalary: Number(e.target.value) })
           }
@@ -49,7 +49,7 @@ const EmployerPAYE = () => {
         <Input
           title="Rent"
           placeholder="% of Gross Salary"
-          value={formData.rent}
+          // value={formData.rent}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setFormData({ ...formData, rent: Number(e.target.value) })
           }
@@ -58,7 +58,7 @@ const EmployerPAYE = () => {
         <Input
           title="Life Insurance Premium (optional)"
           placeholder="--- ---"
-          value={formData.LIP || 0}
+          // value={formData.LIP || 0}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setFormData({ ...formData, LIP: Number(e.target.value) })
           }
@@ -67,7 +67,7 @@ const EmployerPAYE = () => {
         <Input
           title="Other Statutory Relief (Optional)"
           placeholder="--- ---"
-          value={formData.otherRelief}
+          // value={formData.otherRelief}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setFormData({ ...formData, otherRelief: Number(e.target.value) })
           }

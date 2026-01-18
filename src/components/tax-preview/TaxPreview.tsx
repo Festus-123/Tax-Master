@@ -28,15 +28,15 @@ const TaxPreview = () => {
 
   return (
     <div className="w-full lg:w-[80%] flex items-center justify-center p-4 lg:p-8 ">
-      <div className=" w-full flex flex-col p-4 mt-10 lg:mt-0  bg-white rounded-md lg:p-8 gap-10">
+      <div className=" w-full flex flex-col p-4 mt-10 lg:mt-0  bg-white rounded-md lg:p-8 gap-5 md:gap-10">
         <img
           src="/preview.jpg"
           alt="Preview illustrtions"
-          className="w-[40%] md:w-[20%] lg:w-[10%]"
+          className="w-[30%] md:w-[20%] lg:w-[10%] animate-pulse"
         />
         <h1 className="font-medium text-2xl">Tax Preview</h1>
 
-        <div ref={receiptRef} className="w-full flex flex-col items-center justify-center bg-[#80808010] py-4 overflow-y-scroll">
+        <div ref={receiptRef} className="w-full flex flex-col items-center justify-center bg-[#80808010] py-4 px-2">
           <Receipt />
         </div>
 

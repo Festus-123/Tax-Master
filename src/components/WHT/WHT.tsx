@@ -35,7 +35,7 @@ const WithholdingTax = () => {
         <Input
           title="WHT Rate (%)"
           placeholder="5"
-          value={formData.rate}
+          // value={formData.rate}
           onChange={(e) =>
             setFormData({
               ...formData,

@@ -13,6 +13,9 @@ import TaxPreview from "./components/tax-preview/TaxPreview";
 import { formContext } from "./context/formContext";
 import { type ReceiptData } from "./services/taxCalculator";
 
+// toaster
+import { Toaster } from "react-hot-toast";
+
 export default function App() {
   const [receiptData, setReceiptData] = useState<ReceiptData>({
     title: "",
@@ -28,6 +31,7 @@ export default function App() {
         setReceiptData,
       }}
     >
+      <Toaster position="top-right" toastOptions={{ duration: 3000}}/>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Body />}>

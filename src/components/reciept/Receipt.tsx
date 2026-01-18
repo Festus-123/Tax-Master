@@ -30,7 +30,7 @@ const Receipt = () => {
     if (!receiptData) return null;
 
   return (
-    <div className="relative w-full h-230 md:w-[80%] bg-white py-16 px-6 md:px-8 font-mono">
+    <div className="relative w-full h-200 md:h-220 md:w-[80%] bg-white py-16 px-6 md:px-8 font-mono">
       {/* HEADER */}
       <div className="text-center mb-8 mt-8">
         <h1 className="text-2xl font-semibold">{receiptData.title}</h1>
@@ -80,7 +80,7 @@ const Receipt = () => {
       </div>
 
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-10">
-        <h1 className="text-8xl font-bold rotate-[-30deg]">Tax-Master</h1>
+        <h1 className="text-6xl md:text-8xl font-bold rotate-[-30deg]">Tax-Master</h1>
       </div>
     </div>
   );

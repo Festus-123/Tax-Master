@@ -28,7 +28,7 @@ const Income = () => {
         <img
           src="/gross-income.jpeg"
           alt="gross income illustration"
-          className="w-[80%] md:w-[60%] lg:w-[40%]"
+          className="w-[80%] md:w-[60%] lg:w-[40%] animate-pulse"
         />
         <h1 className="font-medium text-2xl">what is your Income ?</h1>
         <div>
