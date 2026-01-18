@@ -4,7 +4,6 @@ import { type ReceiptItem } from '../../services/taxCalculator';
 import { useLocation } from "react-router-dom";
 
 
-
 const Receipt = () => {
   const { receiptData } = useContext(formContext);
   const [remark, setRemak] = useState<string>("")

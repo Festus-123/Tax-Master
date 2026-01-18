@@ -8,7 +8,6 @@ import TermsPolicies from "./components/terms-and-condition/TermsPolicies";
 import Category from "./components/category/Category";
 import Income from "./components/income/Income";
 import TaxPreview from "./components/tax-preview/TaxPreview";
-import Reciept from "./components/reciept/reciept";
 
 // import a global state mangement system to manage data
 import { formContext } from "./context/formContext";
@@ -37,7 +36,6 @@ export default function App() {
             <Route path="category" element={<Category />} />
             <Route path="income" element={<Income />} />
             <Route path="preview" element={<TaxPreview />} />
-            <Route path="reciept" element={<Reciept />} />
           </Route>
         </Routes>
       </BrowserRouter>

@@ -1,9 +1,8 @@
 import { FaDownload } from "react-icons/fa";
 import html2canvas from "html2canvas";
-// import jsPDF from "jspdf"
 import jsPDF from "jspdf";
 import { useRef } from "react";
-import Reciept from "../reciept/reciept";
+import Receipt from "../reciept/Receipt";
 
 const TaxPreview = () => {
   const receiptRef = useRef<HTMLDivElement>(null);
@@ -38,7 +37,7 @@ const TaxPreview = () => {
         <h1 className="font-medium text-2xl">Tax Preview</h1>
 
         <div ref={receiptRef} className="w-full flex flex-col items-center justify-center bg-[#80808010] py-4 overflow-y-scroll">
-          <Reciept />
+          <Receipt />
         </div>
 
         <button
