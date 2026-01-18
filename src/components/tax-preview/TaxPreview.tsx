@@ -1,9 +1,31 @@
-import { useContext } from "react";
-import { formContext } from "../../context/formContext";
+import { FaDownload } from "react-icons/fa";
+import html2canvas from "html2canvas";
+// import jsPDF from "jspdf"
+import jsPDF from "jspdf";
+import { useRef } from "react";
+import Reciept from "../reciept/reciept";
 
 const TaxPreview = () => {
-  const { individualResult, BusinessResult, OtherResult, PAYEResult, VATResult, WHTResult } =
-    useContext(formContext);
+  const receiptRef = useRef<HTMLDivElement>(null);
+
+  const handleDownloadPDF = async () => {
+    if (!receiptRef.current) return;
+
+    // capture the receipt as canvas
+    const canvas = await html2canvas(receiptRef.current, { scale: 2 });
+    const imgData = canvas.toDataURL("image/png");
+
+    // create a PDF
+    const pdf = new jsPDF({
+      orientation: "portrait",
+      unit: "px",
+      format: [canvas.width, canvas.height],
+    });
+
+    pdf.addImage(imgData, "PNG", 0, 0, canvas.width, canvas.height);
+    pdf.save(`Tax-master.pdf`);
+  };
+
 
   return (
     <div className="w-full lg:w-[80%] flex items-center justify-center p-4 lg:p-8 ">
@@ -11,17 +33,23 @@ const TaxPreview = () => {
         <img
           src="/preview.jpg"
           alt="Preview illustrtions"
-          className="w-[80%] md:w-[60%] lg:w-[40%]"
+          className="w-[40%] md:w-[20%] lg:w-[10%]"
         />
         <h1 className="font-medium text-2xl">Tax Preview</h1>
-        <h1 className="">Result for the the TotalTax for each Category:</h1>
-        <p>Individual Result {individualResult ?? 0}</p>
-        <p>Business Result {BusinessResult ?? 0}</p>
-        <p>Others Result {OtherResult ?? 0}</p>
-        <p>Pay As You Earn PAYE Result {PAYEResult ?? 0}</p>
-        <p>Value Added Tax Result {VATResult ?? 0}</p>
-        <p>WItholding Tax Result {WHTResult ?? 0}</p>
-        <iframe src=""></iframe>
+
+        <div ref={receiptRef} className="w-full flex flex-col items-center justify-center bg-[#80808010] py-4 overflow-y-scroll">
+          <Reciept />
+        </div>
+
+        <button
+          onClick={handleDownloadPDF}
+          className="bg-blue-700 hover:bg-blue-500  text-white text-center p-2 md:p-3 lg:p-4 rounded-md w-full cursor-pointer flex flex-row items-center justify-center gap-5"
+        >
+          <div className="">
+            <FaDownload />
+          </div>
+          Download
+        </button>
       </div>
     </div>
   );

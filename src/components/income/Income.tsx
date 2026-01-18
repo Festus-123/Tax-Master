@@ -5,13 +5,13 @@ import Other from "../income-requirements/Other";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { requirementRules } from "../requirements/requirement";
+import { requirementRules } from "../requirements/Requirement";
 
 const Income = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
   const selected = state?.selected;
-  // const firstName = state?.name || "";
+  const firstName = state?.name || "";
   const [requirement, setRequirements] = useState<string[]>([]);
   const [showAll, setShowAl] = useState<boolean>(false);
 
@@ -32,15 +32,15 @@ const Income = () => {
         />
         <h1 className="font-medium text-2xl">what is your Income ?</h1>
         <div>
-          {[...selected].sort().map((item: string) => {
+          {[...selected].sort().map((item: string, i: number) => {
             if (item === "Individual") {
-              return <Individual />;
+              return <Individual key={i}/>;
             } else if (item === "Employer(PAYE)") {
-              return <EmployerPAYE />;
+              return <EmployerPAYE key={i}/>;
             } else if (item === "Business") {
-              return <Business />;
+              return <Business key={i}/>;
             } else if (item === "Other") {
-              return <Other />;
+              return <Other key={i}/>;
             }
           })}
         </div>
@@ -63,7 +63,9 @@ const Income = () => {
           </div>
         </div>
         <button
-          onClick={() => navigate("/preview")}
+          onClick={() => navigate("/preview", {
+            state: { selected: selected, name: firstName }
+          })}
           className="bg-blue-700 hover:bg-blue-500  text-white text-center p-2 md:p-3 lg:p-4 rounded-md w-full cursor-pointer"
         >
           Continue

@@ -8,9 +8,10 @@ import {
 } from "../../services/taxCalculator";
 
 const Individual = () => {
-  const { setIndividualResult } = useContext(formContext)
+  const { setReceiptData } = useContext(formContext)
   const { state } = useLocation();
   const option = state?.option;
+  // console.log("Options in individual", option)
 
   const [hasPension, setHasPension] = useState(false);
   const [hasNHF, setHasNHF] = useState(false);
@@ -25,21 +26,21 @@ const Individual = () => {
   });
 
   useEffect(() => {
-    const made =
+    const { receiptData } =
       IndividualTax(formData, {
         isSalary: option === "Salary earner",
         hasPension,
         hasNHF,
       });
-      setIndividualResult(made)
-  }, [formData, option, hasPension, hasNHF, setIndividualResult]);
+      setReceiptData(receiptData)
+  }, [formData, option, hasPension, hasNHF, setReceiptData]);
 
   return (
     <div className="flex flex-col gap-10 border-b border-[#8080802e] py-4 lg:py-8">
       <h1 className="font-medium text-xl ">Individual</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10">
         <Input
-          value={formData.grossIncome}
+          // value={formData.grossIncome}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setFormData({ ...formData, grossIncome: Number(e.target.value) })
           }
@@ -50,7 +51,7 @@ const Individual = () => {
         {option === "Salary earner" && (
           <Input
             title={"Basic Salary"}
-            value={formData.basicSalary}
+            // value={formData.basicSalary}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setFormData({ ...formData, basicSalary: Number(e.target.value) })
             }
@@ -59,7 +60,7 @@ const Individual = () => {
         )}
 
         <Input
-          value={formData.rent}
+          // value={formData.rent}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setFormData({ ...formData, rent: Number(e.target.value) })
           }
@@ -68,7 +69,7 @@ const Individual = () => {
         />
 
         <Input
-          value={formData.LIP}
+          // value={formData.LIP}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setFormData({ ...formData, LIP: Number(e.target.value) })
           }
@@ -78,7 +79,7 @@ const Individual = () => {
 
         {option !== "Salary earner" && (
           <Input
-            value={formData.pension}
+            // value={formData.pension}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setFormData({ ...formData, pension: Number(e.target.value) })
             }
@@ -89,7 +90,7 @@ const Individual = () => {
 
         {option !== "Salary earner" && (
           <Input
-            value={formData.NHF}
+            // value={formData.NHF}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setFormData({ ...formData, NHF: Number(e.target.value) })
             }

@@ -8,33 +8,25 @@ import TermsPolicies from "./components/terms-and-condition/TermsPolicies";
 import Category from "./components/category/Category";
 import Income from "./components/income/Income";
 import TaxPreview from "./components/tax-preview/TaxPreview";
+import Reciept from "./components/reciept/reciept";
 
 // import a global state mangement system to manage data
 import { formContext } from "./context/formContext";
+import { type ReceiptData } from "./services/taxCalculator";
 
 export default function App() {
-  const [individualResult, setIndividualResult] = useState<number | null>(null);
-  const [PAYEResult, setPAYEResult] = useState<number | null>(null);
-  const [BusinessResult, setBusinessResult] = useState<number | null>(null);
-  const [VATResult, setVATResult] = useState<number | null>(null);
-  const [WHTResult, setWHTResult] = useState<number | null>(null);
-  const [OtherResult, setOtherResult] = useState<number | null>(null);
+  const [receiptData, setReceiptData] = useState<ReceiptData>({
+    title: "",
+    items: [],
+    total: 0
+  });
+
 
   return (
     <formContext.Provider
       value={{
-        individualResult,
-        setIndividualResult,
-        PAYEResult,
-        setPAYEResult,
-        BusinessResult,
-        setBusinessResult,
-        VATResult,
-        setVATResult,
-        WHTResult,
-        setWHTResult,
-        OtherResult,
-        setOtherResult,
+        receiptData,
+        setReceiptData,
       }}
     >
       <BrowserRouter>
@@ -45,6 +37,7 @@ export default function App() {
             <Route path="category" element={<Category />} />
             <Route path="income" element={<Income />} />
             <Route path="preview" element={<TaxPreview />} />
+            <Route path="reciept" element={<Reciept />} />
           </Route>
         </Routes>
       </BrowserRouter>

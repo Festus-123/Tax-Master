@@ -12,8 +12,9 @@ import {
 
 const Business = () => {
   const { state} = useLocation();
-  const { setBusinessResult } = useContext(formContext)
-  const busienssOption = state?.busienssOption;
+  const { setReceiptData } = useContext(formContext)
+  const businessOption = state?.businessOption;
+  // console.log(businessOption, "this ")
   const [select, setSelect] = useState<string[]>([]);
   const [array, setArray] = useState<string[]>([
     "Premises Fee",
@@ -36,9 +37,9 @@ const Business = () => {
   });
 
   useEffect(() => {
-    const made = BusinessTax(formData);
-    setBusinessResult(made)
-  }, [formData, setBusinessResult]);
+  const {receiptData} = BusinessTax(formData);
+    setReceiptData(receiptData)
+  }, [formData, setReceiptData]);
 
   const handleSelect = (item: string) => {
     setSelect((prev) => [...prev, item]);
@@ -50,9 +51,9 @@ const Business = () => {
     setSelect((prev) => prev.filter((i) => i !== item));
   };
 
-  if(busienssOption === "CIT") return;
-  if(busienssOption === "VAT") return <VAT />
-  if(busienssOption === "WHT") return <WHT />
+  if(businessOption === "CIT") return;
+  if(businessOption === "VAT") return <VAT />
+  if(businessOption === "WHT") return <WHT />
 
   return (
     <div className="flex flex-col gap-10 border-b border-[#8080802e] py-4 lg:py-8">

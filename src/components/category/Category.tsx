@@ -68,7 +68,7 @@ const Category = () => {
         <div className="flex flex-col gap-5">
           <label className="font-medium text-md text-lg">Your Name</label>
           <input
-            value={value}
+            // value={value}
             onChange={(e) => setValue(e.target.value)}
             placeholder="First Name / Business name"
             type="text"
@@ -142,7 +142,7 @@ const Category = () => {
                   name: value,
                   other: other,
                   option: option,
-                  busienssOption: businessOption,
+                  businessOption: businessOption,
                 },
               });
             } else {

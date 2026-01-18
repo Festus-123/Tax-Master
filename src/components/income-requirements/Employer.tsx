@@ -4,7 +4,7 @@ import Input from "../input/Input";
 import { EmployerPAYETax, type PAYEInputs } from "../../services/taxCalculator";
 
 const EmployerPAYE = () => {
-  const { setPAYEResult } = useContext(formContext);
+  const { setReceiptData } = useContext(formContext);
   const [hasPension, setHasPension] = useState<boolean>(false);
   const [hasNHF, setHasNHF] = useState<boolean>(false);
   const [formData, setFormData] = useState<PAYEInputs>({
@@ -16,12 +16,13 @@ const EmployerPAYE = () => {
   });
 
   useEffect(() => {
-    const made = EmployerPAYETax(formData, {
+    const {receiptData} = EmployerPAYETax(formData, {
       hasPension,
       hasNHF,
     });
-    setPAYEResult(made);
-  });
+    setReceiptData(receiptData);
+  }, [formData, hasPension, hasNHF, setReceiptData]);
+  
   return (
     <div className="flex flex-col gap-10 border-b border-[#8080802e] py-4 lg:py-8">
       <h1 className="font-medium text-xl">Employer (PAYE)</h1>

@@ -4,16 +4,16 @@ import Input from "../input/Input";
 import { businessWHT, type WHTRules } from "../../services/taxCalculator";
 
 const WithholdingTax = () => {
-  const { setWHTResult} = useContext(formContext)
+  const { setReceiptData} = useContext(formContext)
   const [formData, setFormData] = useState<WHTRules>({
     grossAmount: 0,
     rate: 0,
   });
 
   useEffect(() => {
-    const result = businessWHT(formData);
-    setWHTResult(result)
-  }, [formData, setWHTResult]);
+    const {receiptData} = businessWHT(formData);
+    setReceiptData(receiptData)
+  }, [formData, setReceiptData]);
 
   return (
     <div className="flex flex-col gap-8 border-b border-[#8080802e] py-4 lg:py-8">
@@ -23,7 +23,7 @@ const WithholdingTax = () => {
         <Input
           title="Gross Payment Amount"
           placeholder="5,000,000"
-          value={formData.grossAmount}
+          // value={formData.grossAmount}
           onChange={(e) =>
             setFormData({
               ...formData,
@@ -39,7 +39,7 @@ const WithholdingTax = () => {
           onChange={(e) =>
             setFormData({
               ...formData,
-              rate: Number(e.target.value) / 100,
+              rate: Number(e.target.value)
             })
           }
         />

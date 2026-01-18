@@ -4,7 +4,7 @@ import { formContext } from "../../context/formContext";
 import { OtherTax, type OthersInput } from "../../services/taxCalculator";
 
 const Other = () => {
-  const { setOtherResult } = useContext(formContext)
+  const { setReceiptData } = useContext(formContext)
   const [formData, setFormData] = useState<OthersInput>({
     grossRevenue: 0,
     expenses: 0,
@@ -12,9 +12,9 @@ const Other = () => {
   });
 
   useEffect(() => {
-    const made = OtherTax(formData)
-    setOtherResult(made)
-  }, [formData, setOtherResult])
+    const {receiptData} = OtherTax(formData)
+    setReceiptData(receiptData)
+  }, [formData, setReceiptData])
 
   return (
     <div className="flex flex-col gap-10 border-b border-[#8080802e] py-4 lg:py-8">
