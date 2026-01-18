@@ -30,7 +30,7 @@ const Receipt = () => {
     if (!receiptData) return null;
 
   return (
-    <div className="relative w-full h-200 md:h-220 md:w-[80%] bg-white py-16 px-6 md:px-8 font-mono">
+    <div className="relative w-full h-200 md:h-220 md:w-[80%] bg-white py-12 md:py-16 px-4 md:px-8 font-mono">
       {/* HEADER */}
       <div className="text-center mb-8 mt-8">
         <h1 className="text-2xl font-semibold">{receiptData.title}</h1>
@@ -67,10 +67,10 @@ const Receipt = () => {
 
           {/* Remark */}
         <div className="mt-10 bg-[#f9fafb] px-4 py-1 text-xs md:text-sm flex flex-col w-full gap-2 md:gap-1">
-          <p className="flex gap-5">Holder Name: <span className="font-bold ">{name}</span> </p>
-          <p className="flex gap-1 md:gap-5">Total Tax Summit: <span className="font-bold">Single Document</span></p>
-          <p className="flex gap-5">Tax Approximation Status: <span className={`font-bold ${receiptData.total === 0 ? "text-red-500" : "text-green-500"}`}>{receiptData.total === 0 ? "Unapproved" : "Successful✅"} </span></p>
-          <p className="flex gap-5">Tax Master's Remark: <span className="font-bold">{remark}</span></p>
+          <p className="flex items-center justify-between md:gap-5 md:justify-normal gap-10">Holder Name: <span className="font-bold ">{name}</span> </p>
+          <p className="flex justify-between md:gap-10 md:justify-normal">Total Tax Summit: <span className="font-bold">Single Document</span></p>
+          <p className="flex justify-between md:gap-10 md:justify-normal">Approximation Status: <span className={`font-bold ${receiptData.total === 0 ? "text-red-500" : "text-green-500"}`}>{receiptData.total === 0 ? "Unapproved" : "Successful✅"} </span></p>
+          <p className="flex justify-between md:gap-10 md:justify-normal"> Remark: <span className="font-bold">{remark}</span></p>
         </div>
 
       {/* QR + WATERMARK */}
@@ -80,7 +80,7 @@ const Receipt = () => {
       </div>
 
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-10">
-        <h1 className="text-6xl md:text-8xl font-bold rotate-[-30deg]">Tax-Master</h1>
+        <h1 className="text-5xl md:text-8xl font-bold rotate-[-30deg]">Tax-Master</h1>
       </div>
     </div>
   );
