@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { FaArrowRight, FaVideo } from "react-icons/fa";
 
 const TermsPolicies = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
   return (
     <div className="w-full lg:w-[80%] sticky top-0 flex items-center justify-center p-4 lg:p-8">
@@ -81,10 +81,10 @@ const TermsPolicies = () => {
               <strong>Individuals:</strong> Residents are taxed on worldwide
               income; non-residents are taxed on Nigerian-sourced income. This
               includes income from salaries, freelancing, digital platforms,
-              crypto, and other sources. <br />
+              crypto, and capital gains. <br />
               <strong>Businesses:</strong> All companies, enterprises, and
               digital service providers must comply. Small businesses below
-              specified thresholds may qualify for exemptions.
+              the ₦50M turnover mark qualify for corporate tax exemptions.
             </p>
           </div>
 
@@ -92,16 +92,12 @@ const TermsPolicies = () => {
           <div>
             <p className="font-medium">📌 5. Tax Types and Rates</p>
             <p>
-              <strong>Personal Income Tax (PIT):</strong> Progressive rates from
-              0% to 25%, with exemptions for low-income earners. <br />
-              <strong>Corporate Tax (CIT):</strong> Standard rate 25-30% with
-              exemptions for small companies. <br />
-              <strong>Development Levy:</strong> 4% of assessable profits.{" "}
-              <br />
-              <strong>VAT:</strong> Collected electronically via e-invoicing;
-              some goods/services may be exempt. <br />
-              <strong>Withholding Tax:</strong> Applied to certain payments,
-              including interest and contracts; rates vary by type.
+              <strong>Personal Income Tax (PIT):</strong> Progressive marginal rates from
+              0% to 25%. Annual adjusted income under ₦800,000 is 100% tax-free. <br />
+              <strong>Corporate Tax (CIT):</strong> 0% for Small Companies (turnover under ₦50M), 20% for Medium, and a standard 30% for Large Companies. <br />
+              <strong>Development Levy:</strong> 4% of assessable profits (Small companies are completely exempt). <br />
+              <strong>VAT:</strong> Standard rate of 7.5% managed via e-invoicing. Businesses below ₦50M annual turnover are exempt from registration and charging VAT. <br />
+              <strong>Withholding Tax:</strong> Applied to certain payments, including interest and contracts; rates vary by transaction type.
             </p>
           </div>
 
@@ -135,9 +131,8 @@ const TermsPolicies = () => {
             <p className="font-medium">📌 8. Special Provisions</p>
             <p>
               Digital and virtual asset transactions, including cryptocurrency,
-              fall under taxable income. Informal sector workers may be subject
-              to presumptive taxation. Non-compliance may lead to fines or loss
-              of business license.
+              fall under taxable income with capital gains taxed under progressive PIT bands up to 25%. 
+              Corporate share disposal exemptions apply only where annual sales proceeds are below ₦150 million and net gains are under ₦10 million.
             </p>
           </div>
 
@@ -169,13 +164,13 @@ const TermsPolicies = () => {
           {/* Video explanation */}
           <div id="iFrame" className="flex flex-col gap-2 border-b border-[#80808044] py-4">
             <iframe
-              src="https://www.youtube.com/watch?v=5QRUfGspTdA"
+              src="https://www.youtube.com/embed/5QRUfGspTdA"
               className="w-full h-80"
               title="Nigerian 2026 tax Acts"
             ></iframe>
             <a
               className="text-blue-500 hover:text-blue-500 hover:underline"
-              href="https://www.youtube.come/watch?v=5QRUfGspTdA"
+              href="https://www.youtube.com/watch?v=5QRUfGspTdA"
             >
               Click here to check for more on the Nigerian 2026 Tax Acts
             </a>
